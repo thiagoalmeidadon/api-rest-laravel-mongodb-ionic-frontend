@@ -29,14 +29,22 @@
     </ion-item>
 
     <section class="full-width">
-      <ion-button expand="full" type="submit" color="secondary">salvar</ion-button>
+      <ion-button expand="full" type="submit" color="secondary">Salvar</ion-button>
     </section>
      
   </form>
   
   <!-- Exibindo os usuarios lista -->
     <ion-list *ngFor="let usuario of usuarios"> 
-      <ion-item>{{ usuario.nome }} - {{ usuario.idade }}</ion-item>
+      <ion-item>
+        
+        {{ usuario.nome }} - {{ usuario.idade }}
+       
+        <ion-button (click)="atualizarForm(usuario)" expand="full" type="submit" color="light">Editar</ion-button>
+      
+        <ion-button (click)="deletarUsuario(usuario._id)"  expand="full" type="submit" color="danger">Deletar</ion-button>
+      
+      </ion-item>
     </ion-list>
 
   </ion-content>

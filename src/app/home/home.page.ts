@@ -12,7 +12,7 @@ export class HomePage {
 
   // sempre inicializar os objetos da home 
   public usuarios = [];
-  public usuarioCadastro = {"nome":'', "idade":null};
+  public usuarioCadastro = {"_id":"" , "nome":'' , "idade":null };
 
   constructor(private usuarioService:UsuarioService) {
     this.getUsuarios();
@@ -23,10 +23,26 @@ export class HomePage {
     this.usuarioService.findAll().subscribe(responde => this.usuarios = responde);
   }
 
-  // método para salvar o usuário
+ 
   public salvarUsuario()
   {
-    this.usuarioService.salvarUsuario(this.usuarioCadastro).subscribe(Response=>this.getUsuarios);
+    if(this.usuarioCadastro._id == "")
+    {
+      this.usuarioService.salvarUsuario(this.usuarioCadastro).subscribe(Response => this.getUsuarios);
+    } else {
+      this.usuarioService.editarUsuario(this.usuarioCadastro).subscribe(Response => this.getUsuarios);
+    }
+    
+  }
+
+  public atualizarForm(usuario: { "_id": string; "nome": string; "idade": any; })
+  {
+    this.usuarioCadastro = usuario;
+  }
+
+  public deletarUsuario(id: any)
+  {
+    this.usuarioService.deletarUsuario(id).subscribe(Response => this.getUsuarios);
   }
 
 }

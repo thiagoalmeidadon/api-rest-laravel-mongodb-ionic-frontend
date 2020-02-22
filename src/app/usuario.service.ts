@@ -18,11 +18,23 @@ export class UsuarioService {
   }
 
   // model salvar usuario
-  public salvarUsuario(usuario):Observable<any>
+  public salvarUsuario(usuario: { "_id": string; "nome": string; "idade": any; }):Observable<any>
   {
     // método retorna para a mesma url, porém com método POST
     return this.http.post(this.urlUsuario, usuario);
   }
 
+  //  para editar o usuario 
+  public editarUsuario(usuario: { _id: any; nome?: string; idade?: any; }):Observable<any>
+  {
+    // concatenar na url / e a id do usuario 
+    return this.http.put(this.urlUsuario + "/" + usuario._id, usuario);
+  }
+
+  public deletarUsuario(id: string):Observable<any>
+  {
+    // concatenar na url / e a id do usuario 
+    return this.http.delete(this.urlUsuario + "/" + id);
+  }
 
 }
